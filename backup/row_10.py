@@ -35,7 +35,7 @@ def does_string_fit_row(s: str, row: list):
 
 
 # Options for each character position
-c1_options = "0123456789x"
+c1_options = "123456789x"
 c2_options = "0123456789"
 c3_options = "71x"
 c4_options = "0123456789x"
@@ -80,6 +80,8 @@ for combination in all_combinations:
     for num in nums:
         if num == "":
             continue
+        if num[0] == "0" or len(num) == 1:
+            break
 
         if int(num) % 88 != 0:
             break

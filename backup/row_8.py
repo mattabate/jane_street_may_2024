@@ -5,15 +5,6 @@ import json
 row = [0, 1, 1, 1, 1, 0, 1, 0, 1, 1]
 
 
-def check_x_spacing(s):
-    # Iterate over the string until the third-last character
-    for i in range(len(s) - 2):
-        # Check if the current character and the character two positions later are both 'x'
-        if s[i] == "x" and s[i + 2] == "x":
-            return True
-    return False
-
-
 def does_string_fit_row(s: str, row: list):
     if len(s) != 11:
         raise ValueError("String must be of length 11")
@@ -28,8 +19,6 @@ def does_string_fit_row(s: str, row: list):
             if row[j] == 0 and s[j] != s[j + 1]:
                 return False
             if row[j] == 1 and s[j] == s[j + 1]:
-                return False
-            if check_x_spacing(s):
                 return False
 
     return True
@@ -46,16 +35,38 @@ strings_set2 = ["".join(p) for p in itertools.product(set2, repeat=6)]
 
 new_set1 = []
 for s in strings_set1:
+    if s[0] == "x":
+        continue
+
+    if "x" == s[1] == s[2] or "x" == s[2] == s[3] or "x" == s[3] == s[4]:
+        continue
+
     if s[3] != "x" and s[4] != "x" and s[3] != s[4]:
         continue
     new_set1.append(s)
-strings_set1 = new_set1
+strings_set1 = new_set1  # places 2 5 7 9 11
+strings_set1[0] = strings_set1[0].replace("x", "")
 
 new_set2 = []
 for s in strings_set2:
+    if s[0] == "0" or s[5] == "x":
+        continue
+
+    if (
+        "x" == s[0] == s[1]
+        or "x" == s[2] == s[3]
+        or "x" == s[3] == s[4]
+        or "x" == s[4] == s[5]
+    ):
+        continue
+
     if s[1] != "x" and s[2] != "x" and s[1] == s[2]:
         continue
+
+    if s[1] == "x" and s[2] == "0":
+        continue
     new_set2.append(s)
+strings_set2 = new_set2  # any value, places 1 3 4 6 8 10
 
 
 print("Total strings in set1:", len(strings_set1))
@@ -87,13 +98,16 @@ final_strings = []
 for s1 in tqdm.tqdm(strings_set1):
     for s2 in strings_set2:
         sm = merge_strings(s1, s2)
+        if "xx" in sm:
+            continue
 
         if does_string_fit_row(sm, row):
             nums = sm.split("x")
             for num in nums:
                 if num == "":
                     continue
-
+                if num[0] == "0" or len(num) == 1:
+                    break
                 if num != num[::-1]:
                     break
                 if int(num) % 23 != 0:
@@ -104,10 +118,6 @@ for s1 in tqdm.tqdm(strings_set1):
                 with open("row_8.json", "w") as f:
                     json.dump(final_strings, f)
 
-
-# Optionally, print out the number of combinations or some examples
-print("len final:", len(final_strings))
-print("Example combinations:", final_strings[:10])
 
 with open("row_8.json", "w") as f:
     json.dump(final_strings, f)

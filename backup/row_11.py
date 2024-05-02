@@ -4,15 +4,6 @@ import json
 row = [0, 0, 0, 0, 1, 0, 0, 1, 0, 1]
 
 
-def check_x_spacing(s):
-    # Iterate over the string until the third-last character
-    for i in range(len(s) - 2):
-        # Check if the current character and the character two positions later are both 'x'
-        if s[i] == "x" and s[i + 2] == "x":
-            return True
-    return False
-
-
 def does_string_fit_row(s: str, row: list):
     if len(s) != 11:
         raise ValueError("String must be of length 11")
@@ -28,8 +19,6 @@ def does_string_fit_row(s: str, row: list):
                 return False
             if row[j] == 1 and s[j] == s[j + 1]:
                 return False
-            if check_x_spacing(s):
-                return False
 
     return True
 
@@ -38,8 +27,8 @@ def does_string_fit_row(s: str, row: list):
 c1_options = "123456789x"
 c2_options = "0123456789"
 c3_options = "0123456789x"
-c4_options = "48196025x"
-c5_options = "48196025x"
+c4_options = "0123456789x"
+c5_options = "0123456789x"
 c6_options = "0123456789x"
 c7_options = "37x"
 c8_options = "0123456789x"
@@ -85,7 +74,7 @@ for combination in all_combinations:
         if num == "":
             continue
 
-        if num[0] == "0":
+        if num[0] == "0" or len(num) == 1:
             break
 
         plus_1 = str(int(num) + 1)
