@@ -3,7 +3,7 @@ import json
 import time
 
 ROW = 8
-
+save_file = f"row_{ROW}.json"
 # step 9: find fitting strings for row (product ends in 1)
 rows = {
     0: [0, 0, 1, 0, 0, 1, 0, 1, 0, 0],
@@ -70,7 +70,7 @@ for combination in all_combinations:
             "time remaining",
             int((time.time() - t0) / i * (tot - i)),
         )
-        with open(f"row_{ROW}.json", "w") as f:
+        with open(save_file, "w") as f:
             json.dump(WINS, f)
 
     if does_string_fit_row(s, row):
@@ -87,7 +87,7 @@ for combination in all_combinations:
             WINS.append(s)
 
 
-with open(f"row_{ROW}.json", "w") as f:
+with open(save_file, "w") as f:
     json.dump(WINS, f)
 
 print("Done")
