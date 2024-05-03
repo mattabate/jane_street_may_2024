@@ -49,6 +49,11 @@ def does_string_fit_row(s: str, row: list):
             if row[j] == 1 and s[j] == s[j + 1]:
                 return False
 
+    # for j in range(9):
+    #     if row[j] == 0 and row[j + 1] == 0:
+    #         if s[j + 1] == "x" and s[j] != s[j + 2]:
+    #             return False
+
     return True
 
 

@@ -17,7 +17,7 @@ row = rows[ROW]
 
 
 options = [
-    "x123456789",
+    "x1379",  # since (8, 2) has to be in"1379"
     "1379",
     "x0123456789",
     "x0123456789",
@@ -64,15 +64,13 @@ t0 = time.time()
 for combination in all_combinations:
     s = "".join(combination)
     i += 1
-    if i % (int(tot / 100 / 1000)) == 0:
+    if i % (int(tot / 100 / 200)) == 0:
         print(
             "Percent",
-            int(100 * i * 100 / tot) / 100,  # this prints two decimals
+            int(200 * i * 100 / tot) / 200,  # this prints two decimals
             "Time Remaining",
             int((time.time() - t0) * (tot - i) / (i * 60)),
         )
-        with open(f"row_{ROW}.json", "w") as f:
-            json.dump(WINS, f, indent=2)
 
     if does_string_fit_row(s, row):
         nums = s.split("x")
@@ -89,8 +87,8 @@ for combination in all_combinations:
         else:
             WINS.append(s)
 
+            with open(f"row_{ROW}.json", "w") as f:
+                json.dump(WINS, f, indent=2)
 
-with open(f"row_{ROW}.json", "w") as f:
-    json.dump(WINS, f, indent=2)
 
 print("Done")
