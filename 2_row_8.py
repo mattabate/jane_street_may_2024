@@ -2,7 +2,7 @@ import itertools
 import json
 import time
 
-ROW = 9
+ROW = 8
 
 # step 9: find fitting strings for row (product ends in 1)
 rows = {
@@ -17,17 +17,17 @@ row = rows[ROW]
 
 
 options = [
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
-    "x1379",
+    "x123456789",
+    "1379",
+    "x0123456789",
+    "x0123456789",
+    "x0123456789",
+    "x0123456789",
+    "x0123456789",
+    "x0123456789",
+    "x0123456789",
+    "0123456789",
+    "x0123456789",
 ]
 
 tot = 1
@@ -77,12 +77,9 @@ for combination in all_combinations:
             if len(num) == 1 or num[0] == "0":
                 break
 
-            digits = [int(d) for d in num]
-            product = 1
-            for d in digits:
-                product *= d
-
-            if product % 10 != 1:
+            if num != num[::-1]:
+                break
+            if int(num) % 10 != 1:
                 break
         else:
             WINS.append(s)
