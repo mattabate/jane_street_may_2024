@@ -2,7 +2,7 @@ import json
 
 ROW = 9
 
-with open("row_9.json") as f:
+with open("row_8.json") as f:
     rows = json.load(f)
 
 chars = ["" for _ in range(11)]
