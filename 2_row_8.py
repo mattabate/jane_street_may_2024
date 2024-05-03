@@ -34,7 +34,13 @@ for option in options:
     tot *= len(option)
 
 # Generate all combinations
+print("Starting")
+print("generating combinations")
+t0 = time.time()
 all_combinations = itertools.product(*options)
+
+print("Total combinations", tot)
+print("Time taken", time.time() - t0)
 
 
 def does_string_fit_row(s: str, row: list):
@@ -58,12 +64,12 @@ t0 = time.time()
 for combination in all_combinations:
     s = "".join(combination)
     i += 1
-    if i % (int((tot / 100)) / 10) == 0:
+    if i % (int(tot / 100 / 1000)) == 0:
         print(
             "Percent",
-            int(i * 100 / tot),
+            int(100 * i * 100 / tot) / 100,  # this prints two decimals
             "Time Remaining",
-            int((time.time() - t0) / i * (tot - i) * 60),
+            int((time.time() - t0) * (tot - i) / (i * 60)),
         )
         with open(f"row_{ROW}.json", "w") as f:
             json.dump(WINS, f, indent=2)
