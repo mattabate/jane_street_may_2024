@@ -18,6 +18,7 @@ row = rows[ROW]
 
 options = [
     "x1379",
+    "1379",
     "x1379",
     "x1379",
     "x1379",
@@ -25,8 +26,7 @@ options = [
     "x1379",
     "x1379",
     "x1379",
-    "x1379",
-    "x1379",
+    "1379",
     "x1379",
 ]
 
@@ -43,7 +43,7 @@ def does_string_fit_row(s: str, row: list):
         return False
 
     for j in range(10):
-        if not ("x" == s[j] or "x" == s[j + 1]):
+        if "x" != s[j] and "x" != s[j + 1]:
             if row[j] == 0 and s[j] != s[j + 1]:
                 return False
             if row[j] == 1 and s[j] == s[j + 1]:
@@ -67,7 +67,7 @@ for combination in all_combinations:
             int((time.time() - t0) / i * (tot - i)),
         )
         with open(f"row_{ROW}.json", "w") as f:
-            json.dump(WINS, f)
+            json.dump(WINS, f, indent=2)
 
     if does_string_fit_row(s, row):
         nums = s.split("x")
@@ -77,9 +77,8 @@ for combination in all_combinations:
             if len(num) == 1 or num[0] == "0":
                 break
 
-            digits = [int(d) for d in num]
             product = 1
-            for d in digits:
+            for d in [int(d) for d in num]:
                 product *= d
 
             if product % 10 != 1:
@@ -89,6 +88,6 @@ for combination in all_combinations:
 
 
 with open(f"row_{ROW}.json", "w") as f:
-    json.dump(WINS, f)
+    json.dump(WINS, f, indent=2)
 
 print("Done")
