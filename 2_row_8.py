@@ -58,12 +58,12 @@ t0 = time.time()
 for combination in all_combinations:
     s = "".join(combination)
     i += 1
-    if i % (int(tot / 100)) == 0:
+    if i % (int((tot / 100)) / 10) == 0:
         print(
             "Percent",
             int(i * 100 / tot),
             "Time Remaining",
-            int((time.time() - t0) / i * (tot - i)),
+            int((time.time() - t0) / i * (tot - i) * 60),
         )
         with open(f"row_{ROW}.json", "w") as f:
             json.dump(WINS, f, indent=2)
@@ -78,7 +78,7 @@ for combination in all_combinations:
 
             if num != num[::-1]:
                 break
-            if int(num) % 23 != 1:
+            if int(num) % 23 != 0:
                 break
         else:
             WINS.append(s)
