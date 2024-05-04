@@ -113,3 +113,11 @@ but
 ]
 
 add cant have s[8] and s[10] even. or s[2] and s[4]
+
+after 11, i think there are only two patterns that would lead to unique solutons
+"7714177x989"
+"77111779999"
+"x1144x79992"
+"444443x3992"
+
+NO I THINK THATS IT FOR THE BOTTOM ROWS
