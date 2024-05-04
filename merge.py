@@ -3,7 +3,7 @@ import tqdm
 
 
 ROW1 = 10
-ROW2 = 11
+ROW2 = ROW1 + 1
 
 rows_1_file = f"row_{ROW1}.json"
 rows_2_file = f"row_{ROW2}.json"
@@ -13,7 +13,12 @@ with open(rows_1_file) as f:
 with open(rows_2_file) as f:
     strings_set2 = json.load(f)
 
-col_rol = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1]
+
+col_rol = {
+    9: [1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0],
+    10: [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1],  # 10, 11
+}
+col_rol = col_rol[ROW1]
 
 out = {}
 for s1 in tqdm.tqdm(strings_set1):
@@ -58,17 +63,17 @@ print(f"Row {ROW1}")
 new_row_1 = [x for x in out.keys()]
 print(json.dumps(collect_ith_characters(new_row_1), indent=1))
 
-with open("9_vals.json", "w") as f:
+with open(f"vals_{ROW1}.json", "w") as f:
     json.dump(collect_ith_characters(new_row_1), f)
 
-print("row 10")
+print(f"row {ROW2}")
 new_row_2 = []
 for k in new_row_1:
     new_row_2.extend(out[k])
 new_row_2 = list(set(new_row_2))
 print(json.dumps(collect_ith_characters(new_row_2), indent=1))
 
-with open("10_vals.json", "w") as f:
+with open(f"vals_{ROW2}.json", "w") as f:
     json.dump(collect_ith_characters(new_row_2), f)
 
 
