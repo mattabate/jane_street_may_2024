@@ -2,7 +2,7 @@ import json
 import tqdm
 
 
-ROW1 = 8
+ROW1 = 5
 ROW2 = ROW1 + 1
 
 rows_1_file = f"row_{ROW1}.json"
@@ -15,6 +15,7 @@ with open(rows_2_file) as f:
 
 
 col_rol = {
+    5: [1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0],
     6: [0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0],
     7: [1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0],
     8: [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
