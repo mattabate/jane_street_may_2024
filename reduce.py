@@ -1,8 +1,8 @@
 import json
 
-ROW = 9
+ROW = 8
 
-with open("row_9.json") as f:
+with open(f"row_{ROW}.json") as f:
     rows = json.load(f)
 
 chars = ["" for _ in range(11)]
