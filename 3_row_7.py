@@ -6,7 +6,6 @@ ROW = 7
 
 # step 9: find fitting strings for row (product ends in 1)
 rows = {
-    0: [0, 0, 1, 0, 0, 1, 0, 1, 0, 0],
     7: [1, 0, 0, 0, 1, 0, 1, 1, 0, 0],
     8: [0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
     9: [0, 1, 0, 0, 1, 0, 1, 0, 0, 0],  # right
@@ -18,16 +17,16 @@ row = rows[ROW]
 
 
 options = [
-    "7x",
-    "x012345689",
+    "397x",
+    "0123456789",
+    "x0123456789",
+    "5640x",
     "x023456789",
-    "4x",
-    "x023456789",
-    "7x",
-    "7x",
+    "397x",
+    "397x",
     "0123456789",
     "x012345678",
-    "8",
+    "68x",
     "x012345678",
 ]
 tot = 1
@@ -59,7 +58,7 @@ def does_string_fit_row(s: str, row: list):
 
 
 # Print each combination as a string
-DISC = 100
+DISC = 10
 i = 0
 WINS = []
 t0 = time.time()
@@ -82,8 +81,7 @@ for combination in all_combinations:
             if len(num) == 1 or num[0] == "0":
                 break
 
-            plus = str(int(num) + 1)
-            if plus != plus[::-1]:
+            if int(num) % 37 != 0:
                 break
         else:
             WINS.append(s)
